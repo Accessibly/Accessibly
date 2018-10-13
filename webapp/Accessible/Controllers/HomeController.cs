@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Accessible.Models;
+using Accessible.Core.DTOs;
+using Accessible.Core.Repositories;
 
 namespace Accessible.Controllers
 {
@@ -12,6 +10,25 @@ namespace Accessible.Controllers
     {
         public IActionResult Index()
         {
+            var repo = new CoreRepository();
+            var model = new MapViewModel
+            {
+                Locations = repo.Get(-34.5, -33, 151, 152)
+            };
+
+            return View(model);
+        }
+
+        public IActionResult AddLocation()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddLocation(Location location)
+        {
+            var repo = new CoreRepository();
+            repo.Add(location);
             return View();
         }
 
