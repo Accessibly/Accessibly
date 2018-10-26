@@ -29,7 +29,7 @@ namespace Accessible.Controllers
         {
             var repo = new CoreRepository();
             repo.Add(location);
-            return View();
+            return Index();
         }
 
         public IActionResult About()

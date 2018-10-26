@@ -5,6 +5,10 @@
 
 
 <div id="map"></div>
+<button class="btn btn-primary" id="add" onclick="toggleAdd()">+</button>
+<div id="addPane" hidden>
+    @await Html.PartialAsync("AddLocation", Model.NewItem)
+</div>
 <script>
     function setMarkers(map) {
         var beaches = @Html.Raw(Json.Serialize(Model.Locations));
@@ -29,6 +33,11 @@
             mapTypeControlOptions: { mapTypeIds: [] }
         });
         setMarkers(map);
+    }
+
+    function toggleAdd() {
+        var add = document.getElementById("addPane");
+        $(add).toggle(600);
     }
 </script>
 <script async defer

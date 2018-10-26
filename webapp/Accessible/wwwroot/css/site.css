@@ -2,10 +2,10 @@
 for details on configuring this project to bundle and minify static web assets. */
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 .main-content {
+    position: relative;
     height: 100%;
     width: 100%;
 }
@@ -30,6 +30,17 @@ body {
 /* Optional: Makes the sample page fill the window. */
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
+}
+
+#add {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+#addPane {
+    position:absolute;
+    top: 5px;
+    left: 35px;
+    background: rgb(255, 255, 255);
 }

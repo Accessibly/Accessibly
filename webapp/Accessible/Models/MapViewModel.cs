@@ -6,5 +6,7 @@ namespace Accessible.Models
     public class MapViewModel
     {
         public IEnumerable<Location> Locations;
+
+        public Location NewItem;
     }
 }
