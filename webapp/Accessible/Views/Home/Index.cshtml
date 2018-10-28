@@ -10,34 +10,31 @@
     @await Html.PartialAsync("AddLocation", Model.NewItem)
 </div>
 <script>
-    function setMarkers(map) {
-        var beaches = @Html.Raw(Json.Serialize(Model.Locations));
-        for (var i = 0; i < beaches.length; i++) {
-            var beach = beaches[i];
-            var marker = new google.maps.Marker({
-                position: { lat: beach.lat, lng: beach.long },
-                map: map,
-                icon: `https://maps.google.com/mapfiles/ms/icons/${beach.colour}-dot.png`,
-                animation: google.maps.Animation.DROP,
-                title: beach.name
-            });
-        }
-    }
-
     var map;
+    var markers = {};
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 11,
             // TODO: replace with user's location from IP
             center: { lat: -33.9, lng: 151 },
             mapTypeControlOptions: { mapTypeIds: [] }
-        });
-        setMarkers(map);
-    }
+        });        
 
-    function toggleAdd() {
-        var add = document.getElementById("addPane");
-        $(add).toggle(600);
+        google.maps.event.addListener(map, 'idle', function () {
+            $.ajax({
+                url: '@Url.Action("GetLocations", "Home")',
+                data: JSON.stringify({
+                            MinLat: map.getBounds().getSouthWest().lat(),
+                            MaxLat: map.getBounds().getNorthEast().lat(),
+                            MinLong: map.getBounds().getSouthWest().lng(),
+                            MaxLong: map.getBounds().getNorthEast().lng()
+                    }),
+                type: "POST",
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (locations) {
+                markers = setMarkers(map, locations, markers);
+            });
+        });
     }
 </script>
 <script async defer

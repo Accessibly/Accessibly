@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Accessible.Models;
 using Accessible.Core.DTOs;
 using Accessible.Core.Repositories;
+using System.Linq;
 
 namespace Accessible.Controllers
 {
@@ -13,7 +14,7 @@ namespace Accessible.Controllers
             var repo = new CoreRepository();
             var model = new MapViewModel
             {
-                Locations = repo.Get(-34.5, -33, 151, 152)
+                Locations = repo.Get(new Rectangle(-34.5, -33, 151, 152))
             };
 
             return View(model);
@@ -30,6 +31,12 @@ namespace Accessible.Controllers
             var repo = new CoreRepository();
             repo.Add(location);
             return Index();
+        }
+
+        [HttpPost]
+        public ActionResult<Location[]> GetLocations([FromBody] Rectangle rectangle)
+        {
+            return new CoreRepository().Get(rectangle).ToArray();
         }
 
         public IActionResult About()

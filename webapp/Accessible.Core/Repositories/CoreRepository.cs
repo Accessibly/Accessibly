@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using Accessible.Core.DTOs;
 
 namespace Accessible.Core.Repositories
 {
@@ -31,9 +32,9 @@ namespace Accessible.Core.Repositories
             return Map(_context.LocationEntities.FirstOrDefault(l => l.Id == id));
         }
 
-        public IEnumerable<DTOs.Location> Get(double minLat, double minLong, double maxLat, double maxLong)
+        public IEnumerable<Location> Get(Rectangle rectangle)
         {
-            return _context.LocationEntities.Where(l => l.Lat > minLat && l.Lat < maxLat && l.Long > minLong && l.Long < maxLong)
+            return _context.LocationEntities.Where(l => rectangle.Contains(l.Lat, l.Long))
                 .Select(l => Map(l)).ToArray();
         }
 
