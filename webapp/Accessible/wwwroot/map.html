@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<title>Accessibly - A disability friendly social guide.</title>
+<meta name="description" content="Find and rate accessibility of restaurants, hotels, stores, bars and more."/>
+<!--Subscribe to mailing list-->
+<script src="aws-sdk.min.js"></script>
+<script type="text/javascript">
+        var LPAWS = {};
+
+        // Initialize the Amazon Cognito credentials provider
+        AWS.config.region = 'eu-west-1'; // Region
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'eu-west-1:e4c24108-5050-42f8-ac0b-761c46aa947f',
+        });
+
+        LPAWS.sendToTopic = function() {
+            var sns = new AWS.SNS();
+            var params = {
+                //Message: 'Hello topic', /* required */
+                Message: document.querySelector('#input-msg').value,
+                Subject: 'Browser SNS publish - contact form',
+                TopicArn: 'arn:aws:sns:eu-west-1:717437904155:com-website-contact-form'
+            };
+            sns.publish(params, function(err, data) {
+                if (err) console.log(err, err.stack); // an error occurred
+                else     console.log(data);           // successful response
+            });
+        };
+</script>
+    
+<!--SEO-->
+<meta property="og:locale" content="en_AU" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Accessibly - A disability friendly social guide" />
+<meta property="og:description" content="Find and rate accessibility of restaurants, hotels, stores, bars and more."/>
+<meta property="og:url" content="https://accessibly.com/" />
+<meta property="og:site_name" content="Accessibly" />
+<meta property="og:image" content="http://photoshopfordesignerswhodontusephotoshop.com/wp-content/uploads/2017/12/seo-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Find and rate accessibility of restaurants, hotels, stores, bars and more."/>
+<meta name="twitter:title" content="Disability friendly social guide" />
+<meta name="twitter:image" content="https://photoshopfordesignerswhodontusephotoshop.com/wp-content/uploads/2017/12/seo-image.jpg" />
+
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//secure.gravatar.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="stylesheet" href="frontend.css" type="text/css" media="all"/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://photoshopfordesignerswhodontusephotoshop.com/xmlrpc.php?rsd" />
+<link rel='shortlink' href='https://wp.me/P9usrR-9' />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link href="https://fonts.googleapis.com/css?family=Poppins:700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="https://www.freefavicon.com/freefavicons/icons/wheelchair-15-152-260869.png" sizes="32x32">  </head>
+
+<body>
+  <section class="has-bg-img" style="background-image: url('bg-bench.jpg')>
+    <div class="container">
+      <h1>Hey you!</h1>
+      <h2>Our coders are working hard to help you go places Access<span style="color: rgb(255, 35, 90);">ibly</span>.</h2>
+      <div>
+        <p style="font-size: 1.33333rem; line-height: 2rem;">In the meantime, you can get exclusive perks by signing up before our official launch.</p>
+          <form><input type="text" name="emailaddress" placheholder="Email Address" id="input-email"/>
+            <button onclick="LPAWS.sendToTopic(); return false;">Sign U<p/button>
+          </form>
+      </div>
+        <p>And follow us on <a href="http://twitter.com/AccessiblyAU">Twitter</a>, <a>Facebook</a> and <a>Instagram</a>.</p>
+      </div>
+    </div>
+  </section>        
