@@ -24,10 +24,8 @@
             $.ajax({
                 url: '@Url.Action("GetLocations", "Home")',
                 data: JSON.stringify({
-                            MinLat: map.getBounds().getSouthWest().lat(),
-                            MaxLat: map.getBounds().getNorthEast().lat(),
-                            MinLong: map.getBounds().getSouthWest().lng(),
-                            MaxLong: map.getBounds().getNorthEast().lng()
+                    southWest: map.getBounds().getSouthWest(),
+                    northEast: map.getBounds().getNorthEast()
                     }),
                 type: "POST",
                 contentType: 'application/json; charset=utf-8'

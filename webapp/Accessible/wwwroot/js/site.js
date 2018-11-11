@@ -18,13 +18,15 @@ function setMarkers(map, locations, markers) {
     locations.forEach(function (marker) {
         if (!(marker.id in newMarkers)) {
             newMarkers[marker.id] = new google.maps.Marker({
-                position: { lat: marker.lat, lng: marker.long },
+                position: { lat: marker.coordinate.lat, lng: marker.coordinate.lng },
                 map: map,
                 icon: `https://maps.google.com/mapfiles/ms/icons/${marker.colour}-dot.png`,
                 title: marker.name
             });
         }
     });
+
+    //var cluster = new MarkerClusterer(map, newlocations)
 
     return newMarkers;
 }
