@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using Accessible.Core.DTOs;
 using Accessible.Core.Utils;
+using System.IO;
+using CsvHelper.Configuration;
 
 namespace Accessible.Core.Repositories
 {
@@ -18,13 +20,38 @@ namespace Accessible.Core.Repositories
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Location, LocationEntity>().ForMember(l => l.Lat, opt => opt.Ignore()).ForMember(l => l.Long, opt => opt.Ignore());
-                cfg.CreateMap<LocationEntity, Location>().ForMember(l => l.Coordinate, opt => opt.Ignore());
+                cfg.CreateMap<Location, LocationEntity>()
+                .ForMember(l => l.Lat, opt => opt.Ignore())
+                .ForMember(l => l.Long, opt => opt.Ignore())
+                .ForMember(l => l.Category, opt => opt.Ignore());
+                cfg.CreateMap<LocationEntity, Location>()
+                .ForMember(l => l.Coordinate, opt => opt.Ignore())
+                .ForMember(l => l.Colour, opt => opt.Ignore());
             });
 
             _mapper = config.CreateMapper();
 
             _context.Database.Migrate();
+
+            if (!_context.LocationEntities.Any())
+            {
+                SeedData();
+            }
+        }
+
+        private void SeedData()
+        {
+            using (var contents = new StreamReader("../Data/seedData.csv"))
+            using (var reader = new CsvHelper.CsvReader(contents))
+            {
+                reader.Configuration.RegisterClassMap<LocationEntityMap>();
+                reader.Configuration.PrepareHeaderForMatch = header => header.ToLower();
+                var items = reader.GetRecords<LocationEntity>();
+
+                _context.LocationEntities.AddRange(items);
+
+                _context.SaveChanges();
+            }
         }
 
         private LocationEntity Map(Location location)
@@ -32,6 +59,20 @@ namespace Accessible.Core.Repositories
             var result = _mapper.Map<LocationEntity>(location);
             result.Lat = location.Coordinate.Lat;
             result.Long = location.Coordinate.Lng;
+
+            switch (location.Colour)
+            {
+                case "green":
+                    result.Category = Category.Accessible;
+                    break;
+                case "red":
+                    result.Category = Category.NotAccessible;
+                    break;
+                case "yellow":
+                    result.Category = Category.PartiallyAccessible;
+                    break;
+            }
+
             return result;
         }
 
@@ -39,6 +80,23 @@ namespace Accessible.Core.Repositories
         {
             var result = _mapper.Map<Location>(location);
             result.Coordinate = new Coordinate(location.Lat, location.Long);
+
+            switch (location.Category)
+            {
+                case Category.Accessible:
+                    result.Colour = "green";
+                    break;
+                case Category.Unknown:
+                    result.Colour = "red";
+                    break;
+                case Category.NotAccessible:
+                    result.Colour = "red";
+                    break;
+                case Category.PartiallyAccessible:
+                    result.Colour = "yellow";
+                    break;
+            }
+
             return result;
         }
 
@@ -85,20 +143,15 @@ namespace Accessible.Core.Repositories
             {
                 optionsBuilder.UseSqlite("Data Source=accesible.db");
             }
+        }
 
-#if DEBUG
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
+        private sealed class LocationEntityMap : ClassMap<LocationEntity>
+        {
+            public LocationEntityMap()
             {
-                modelBuilder.Entity<LocationEntity>().HasData(new[]
-                {
-                    new LocationEntity { Id = Guid.NewGuid(), Name = "Bondi Beach", Lat = -33.890542, Long = 151.274856, Colour = "red" },
-                    new LocationEntity { Id = Guid.NewGuid(), Name = "Coogee Beach", Lat = -33.923036, Long = 151.259052, Colour = "yellow" },
-                    new LocationEntity { Id = Guid.NewGuid(), Name = "Cronulla Beach", Lat = -34.028249, Long = 151.157507, Colour = "green" },
-                    new LocationEntity { Id = Guid.NewGuid(), Name = "Manly Beach", Lat = -33.800101, Long = 151.287478, Colour = "red" },
-                    new LocationEntity { Id = Guid.NewGuid(), Name = "Maroubra Beach", Lat = -33.950198, Long = 151.259302, Colour = "yellow" }
-                });
+                AutoMap();
+                Map(l => l.Id).Ignore();
             }
-#endif
         }
     }
 }

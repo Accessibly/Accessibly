@@ -21,7 +21,7 @@ namespace Accessible.Core.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Colour");
+                    b.Property<int>("Category");
 
                     b.Property<double>("Lat");
 
@@ -32,14 +32,6 @@ namespace Accessible.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LocationEntities");
-
-                    b.HasData(
-                        new { Id = new Guid("bebfe258-acec-4e50-b7e4-172336b2b6b1"), Colour = "red", Lat = -33.890542, Long = 151.274856, Name = "Bondi Beach" },
-                        new { Id = new Guid("02eb683e-afc1-4ac9-a7c5-f861efcbfafd"), Colour = "yellow", Lat = -33.923036, Long = 151.259052, Name = "Coogee Beach" },
-                        new { Id = new Guid("815bc386-0577-4f74-b14e-e8adb281202a"), Colour = "green", Lat = -34.028249, Long = 151.157507, Name = "Cronulla Beach" },
-                        new { Id = new Guid("aa1f848d-a7a9-418a-bd44-652d321ecda6"), Colour = "red", Lat = -33.800101, Long = 151.287478, Name = "Manly Beach" },
-                        new { Id = new Guid("68496c48-ca5c-4eff-b383-a3cc5e7f3974"), Colour = "yellow", Lat = -33.950198, Long = 151.259302, Name = "Maroubra Beach" }
-                    );
                 });
 #pragma warning restore 612, 618
         }
