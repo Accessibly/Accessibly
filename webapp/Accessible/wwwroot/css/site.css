@@ -14,10 +14,6 @@ for details on configuring this project to bundle and minify static web assets. 
     padding-right: 15px;
 }
 
-.navbar {
-    margin-bottom: 0px;
-}
-
 /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
 #map {

@@ -120,18 +120,6 @@ audio,video { max-width: 100%; }
 .mockup { width: 100%; display: block; text-align: center; }
 .mockup img { width: 100%; height: auto; max-width: 1200px }
 
-img.emoji {
-  display: inline;
-  border: none;
-  box-shadow: none;
-  height: 1em;
-  width: 1em;
-  margin: 0 .07em;
-  vertical-align: -0.1em;
-  background: none;
-  padding: 0;
-}
-
 .has-bg-img {
     background-size: cover;
     background-attachment: fixed;
@@ -237,7 +225,7 @@ a.explore-call-to-action:hover { background-color: rgb(205,5,60); }
   #landing-blurb { padding-top: 0.444rem; }
   #section1 { padding-top: 3.556rem; padding-bottom: 3.556rem; }
   .flex-four-grid { flex-direction: column; -webkit-flex-direction: column; -ms-flex-direction: column }
-  .flex-three-grid { flex-direction: column; -webkit-flex-direction: column; -ms-flex-direction: column }}
+  .flex-three-grid { flex-direction: column; -webkit-flex-direction: column; -ms-flex-direction: column }
   .footer-socials a { margin: 0em 2em }}
 
 /* XS */
