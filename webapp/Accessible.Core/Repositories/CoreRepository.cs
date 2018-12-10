@@ -41,16 +41,19 @@ namespace Accessible.Core.Repositories
 
         private void SeedData()
         {
-            using (var contents = new StreamReader("../Data/seedData.csv"))
-            using (var reader = new CsvHelper.CsvReader(contents))
+            if (File.Exists("../Data/seedData.csv"))
             {
-                reader.Configuration.RegisterClassMap<LocationEntityMap>();
-                reader.Configuration.PrepareHeaderForMatch = header => header.ToLower();
-                var items = reader.GetRecords<LocationEntity>();
+                using (var contents = new StreamReader("../Data/seedData.csv"))
+                using (var reader = new CsvHelper.CsvReader(contents))
+                {
+                    reader.Configuration.RegisterClassMap<LocationEntityMap>();
+                    reader.Configuration.PrepareHeaderForMatch = header => header.ToLower();
+                    var items = reader.GetRecords<LocationEntity>();
 
-                _context.LocationEntities.AddRange(items);
+                    _context.LocationEntities.AddRange(items);
 
-                _context.SaveChanges();
+                    _context.SaveChanges();
+                }
             }
         }
 
