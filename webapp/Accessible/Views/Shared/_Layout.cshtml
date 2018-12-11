@@ -3,52 +3,55 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Accessible</title>
+    <title>@ViewData["Title"] Accessibly</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/frontend.css" />
     </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+
+    <!--SEO-->
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Accessibly - A disability friendly social guide" />
+    <meta property="og:description" content="Find and rate accessibility of restaurants, hotels, stores, bars and more." />
+    <meta property="og:url" content="https://accessibly.com.au/" />
+    <meta property="og:site_name" content="Accessibly" />
+    <meta property="og:image" content="~/images/mockup.png" />
+    <meta name="twitter:card" content="~/images/mockup.png" />
+    <meta name="twitter:description" content="Find and rate accessibility of restaurants, hotels, stores, bars and more." />
+    <meta name="twitter:title" content="Disability friendly social guide" />
+    <meta name="twitter:image" content="~/images/mockup.png" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="https://www.freefavicon.com/freefavicons/icons/wheelchair-15-152-260869.png" sizes="32x32">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Accessible</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="AddLocation">Add Location</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Accessible</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="AddLocation">Add Location</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="main-content">
-        @*<div class="container body-content">*@
+    <div class="map-content">
         @RenderBody()
-        @*<hr />
-        <footer>
-            <p>&copy; 2018 - Accessible</p>
-        </footer>*@
-        @*</div>*@
     </div>
 
     <environment include="Development">
