@@ -1,0 +1,40 @@
+﻿@model MapViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div id="map"></div>
+<button class="btn btn-primary" id="add" onclick="toggleAdd()">+</button>
+<div id="addPane" hidden>
+    @await Html.PartialAsync("AddLocation", Model.NewItem)
+</div>
+<script>
+    var map;
+    var markers = {};
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 11,
+            // TODO: replace with user's location from IP
+            center: { lat: -33.9, lng: 151 },
+            mapTypeControlOptions: { mapTypeIds: [] }
+        });        
+
+        google.maps.event.addListener(map, 'idle', function () {
+            $.ajax({
+                url: '@Url.Action("GetLocations", "Home")',
+                data: JSON.stringify({
+                    southWest: map.getBounds().getSouthWest(),
+                    northEast: map.getBounds().getNorthEast()
+                    }),
+                type: "POST",
+                contentType: 'application/json; charset=utf-8'
+            }).done(function (locations) {
+                markers = setMarkers(map, locations, markers);
+            });
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap">
+</script>

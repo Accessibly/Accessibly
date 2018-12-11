@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Accessible.Core.DTOs.ContactDetails">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAggAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTOs\ContactDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Accessible.Core.DTOs.Feature">
+    <Position X="8.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTOs\Feature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Accessible.Core.DTOs.Location">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAEAACAgAAAIIAADAAQAAAIAAAACAQAAABAAAAA=</HashCode>
+      <FileName>DTOs\Location.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ContactDetails" />
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Features" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Accessible.Core.DTOs.Review">
+    <Position X="8.5" Y="4.25" Width="1.5" />
+    <AssociationLine Name="AbsentFeatures" Type="Accessible.Core.DTOs.Feature">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.271" Y="0.12" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAgAAAQAAAAICAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTOs\Review.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Location" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="AbsentFeatures" />
+      <Property Name="PresentFeatures" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Accessible.Core.DTOs.User">
+    <Position X="5.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAACAABAAAAAAAQAQAAAIQCAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTOs\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserType" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Requirements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Enum Name="Accessible.Core.DTOs.LocationType">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEEABQ=</HashCode>
+      <FileName>DTOs\Location.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Accessible.Core.DTOs.UserType">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAEAAAAQAAEAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>DTOs\User.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,42 @@
+﻿@model Accessible.Core.DTOs.Location
+
+@{
+    ViewData["Title"] = "AddLocation";
+}
+
+<h4>Location</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddLocation">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colour" class="control-label"></label>
+                <input asp-for="Colour" class="form-control" />
+                <span asp-validation-for="Colour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Coordinate.Lat" class="control-label"></label>
+                <input asp-for="Coordinate.Lat" class="form-control" />
+                <span asp-validation-for="Coordinate.Lat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Coordinate.Lng" class="control-label"></label>
+                <input asp-for="Coordinate.Lng" class="form-control" />
+                <span asp-validation-for="Coordinate.Lng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
